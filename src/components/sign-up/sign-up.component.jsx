@@ -23,7 +23,6 @@ class SignUp extends React.Component {
         event.preventDefault();
 
         const {displayName, email, password, confirmPassword} = this.state;
-        console.log('Testing submit');
         if(password !== confirmPassword) {
             alert("Passwords don't match!");
             return;
@@ -41,7 +40,7 @@ class SignUp extends React.Component {
             })
 
         } catch (error) {
-            console.error("Error occurred while creating the new user: ",error);
+            console.log("Error occurred while creating the new user: ",error);
         }
     };
 
@@ -56,7 +55,7 @@ class SignUp extends React.Component {
             <div  className="sign-up">
                 <h2 className="title">I do not have an account</h2>
                 <span>Sign up with your email and passowrd</span>
-                <form className="sign-up-form" onSubmit={this.handleSumbit}>
+                <form className="sign-up-form" onSubmit={this.handleSubmit}>
                     <FormInput type='text' name='displayName' value={displayName} onChange={this.handleChange} label='Display Name' required/>
                     <FormInput type='email' name='email' value={email} onChange={this.handleChange} label='Email' required/>
                     <FormInput type='password' name='password' value={password} onChange={this.handleChange} label='Password' required/>
