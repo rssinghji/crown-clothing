@@ -1,15 +1,26 @@
 import './App.css';
 import React from 'react';
-import HomePage from './pages/homepage/homepage.component';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import ShopPage from './pages/shop/shop.component';
-import Header from './components/header/header.component';
-import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+
+// import firebase
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+
+// import redux
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
+
+// import selectors
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
+
+// import pages
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages/shop/shop.component';
+import ContactPage from './pages/contact/contact.component';
+import CheckoutPage from './pages/checkout/checkout.component';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Header from './components/header/header.component';
+
 
 class App extends React.Component { 
   unsubscribeFromAuth = null
@@ -41,7 +52,8 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />  {/*exact without = means true i.e. exact <=> exact={true}*/}
           <Route exact path='/shop' component={ShopPage} />  
-          <Route exact path='/contact' component={ShopPage} /> 
+          <Route exact path='/contact' component={ContactPage} /> 
+          <Route exact path='/checkout' component={CheckoutPage} /> 
           <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to="/"/>) : (<SignInAndSignUpPage />)} />  
         </Switch>
       </div>
