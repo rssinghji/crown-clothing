@@ -20,6 +20,7 @@ import ContactPage from './pages/contact/contact.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
+import CollectionPage from  "./pages/collection/collection.component";
 
 
 class App extends React.Component { 
@@ -55,6 +56,7 @@ class App extends React.Component {
           <Route exact path='/contact' component={ContactPage} /> 
           <Route exact path='/checkout' component={CheckoutPage} /> 
           <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to="/"/>) : (<SignInAndSignUpPage />)} />  
+          <Route path='/shop/:collectionId' component={CollectionPage} />
         </Switch>
       </div>
     );
