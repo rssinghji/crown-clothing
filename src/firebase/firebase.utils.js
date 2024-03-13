@@ -16,7 +16,7 @@ export const createUserProfileDocument = async  (userAuth, additionalData) => {
     if (!userAuth) return; // user auth object does not exist
     const userRef = firestore.doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get();
-    console.log(snapShot);
+    // console.log(snapShot);
 
     if(!snapShot.exists) {
         const { displayName, email } = userAuth;
@@ -35,6 +35,19 @@ export const createUserProfileDocument = async  (userAuth, additionalData) => {
     }
 
     return userRef;
+};
+
+// Code to add local collection data to firebase
+export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
+    const  collectionRef = firestore.collection(collectionKey);
+    // console.log("adding to " + collectionRef);
+    const batch = firestore.batch();
+    objectToAdd.forEach(obj => {
+        const newDocRef = collectionRef.doc();
+        batch.set(newDocRef, obj);
+    });
+
+    return await batch.commit();
 };
 
 // Initialize Firebase
