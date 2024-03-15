@@ -23,7 +23,7 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up
 import Header from './components/header/header.component';
 import CollectionPage from  "./pages/collection/collection.component";
 // import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
-
+// import WithSpinner from './components/with-spinner/with-spinner.component';
 
 class App extends React.Component { 
   unsubscribeFromAuth = null
