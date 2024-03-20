@@ -39,13 +39,31 @@ class ShopPage extends React.Component {
         const {updateCollections} = this.props;
         const collectionRef = firestore.collection('collections');
 
-        collectionRef.onSnapshot(async snapshot => {
+        // All Firebase DBs are nested under the base url: https://firestore.googleapis.com/v1/
+        // So our project path becomes: https://firestore.googleapis.com/v1/projects/crown-db-1c71a/databases/(default)/documents
+
+        // Following is the fetch pattern
+        // fetch('https://firestore.googleapis.com/v1/projects/crown-db-1c71a/databases/(default)/documents/collections')
+        // .then(response => response.json())
+        // .then(collections => console.log(collections));
+
+        // Following is the promise pattern : live data only time when mounted
+        collectionRef.get().then(snapshot => {
             // console.log(snapshot);
             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
             // console.log(collectionsMap);
             updateCollections(collectionsMap);
             this.setState({loading: false});
         });
+
+        // Following is the observer pattern - live data every time form snapshot
+        // collectionRef.onSnapshot(async snapshot => {
+        //     // console.log(snapshot);
+        //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+        //     // console.log(collectionsMap);
+        //     updateCollections(collectionsMap);
+        //     this.setState({loading: false});
+        // });
     };
 
     // render() {
