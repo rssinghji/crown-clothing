@@ -21,8 +21,6 @@ import ContactPage from './pages/contact/contact.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
-import CollectionPage from  "./pages/collection/collection.component";
-// import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 
 
 class App extends React.Component { 
@@ -56,11 +54,10 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />  {/*exact without = means true i.e. exact <=> exact={true}*/}
-          <Route exact path='/shop' component={ShopPage} />  
+          <Route path='/shop' component={ShopPage} />  
           <Route exact path='/contact' component={ContactPage} /> 
           <Route exact path='/checkout' component={CheckoutPage} /> 
           <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to="/"/>) : (<SignInAndSignUpPage />)} />  
-          <Route path='/shop/:collectionId' component={CollectionPage} />
         </Switch>
       </div>
     );
