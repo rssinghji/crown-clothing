@@ -1,14 +1,14 @@
 import React from "react";
 import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
 import { Route } from "react-router-dom";
-// import CollectionPage from  "../collection/collection.component";
+import CollectionPage from  "../collection/collection.component";
 import { firestore, convertCollectionsSnapshotToMap } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import { updateCollections } from "../../redux/shop/shop.actions";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview);
-// const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 // You receive match, location and history nested in Route object
 // const ShopPage = ({ match }) => {
@@ -16,7 +16,7 @@ const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview);
 //     return (
 //     <div className="shop-page">
 //         <Route exact path={`${match.path}`} component={CollectionsOverview}/> 
-//         {/* <Route path={`${match.path}/:collectionId`} component={CollectionPage} /> This doesn't work, so added this in App.js */} 
+//         <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
 //     </div>
 //     );
 // };
@@ -53,17 +53,17 @@ class ShopPage extends React.Component {
     //     return (
     //         <div className="shop-page">
     //             <Route exact path={`${match.path}`} component={CollectionsOverview}/> 
-    //             {/* <Route path={`${match.path}/:collectionId`} component={CollectionPage} /> */}
+    //             <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
     //         </div>
     //     );
-    // } // revious render()
+    // } // previous render()
     render() {
         const { match } = this.props;
         const { loading } = this.state;
         return (
             <div className="shop-page">
                 <Route exact path={`${match.path}`} render={(props) => <CollectionOverviewWithSpinner isLoading={loading} {...props} />}/> 
-                {/* <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props} />} /> */}
+                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props} />} />
             </div>
         );
     }
