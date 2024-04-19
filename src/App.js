@@ -20,6 +20,7 @@ import ContactPage from './pages/contact/contact.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
+import { checkUserSession } from './redux/user/user.actions';
 
 class App extends React.Component { 
   unsubscribeFromAuth = null
@@ -41,6 +42,8 @@ class App extends React.Component {
       // addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})));
 
     // });
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
   componentWillUnmount() {
@@ -68,4 +71,8 @@ const mapStateToProps = createStructuredSelector({
   // collectionsArray: selectCollectionsForPreview
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  checkUserSession: () => dispatch(checkUserSession())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
